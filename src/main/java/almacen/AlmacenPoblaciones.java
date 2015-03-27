@@ -2,6 +2,7 @@ package almacen;
 
 import paa.provincias.IPoblacion;
 import paa.provincias.IAlmacenPoblaciones;
+import java.io.FileNotFoundException;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -363,6 +364,8 @@ public class AlmacenPoblaciones implements IAlmacenPoblaciones {
             fileIn.close();
 
             return true;
+        }
+        catch (FileNotFoundException e) {
         }
         catch(IOException e) {
             e.printStackTrace();

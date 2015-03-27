@@ -1,22 +1,25 @@
-package cliente;
+package cliente.handlers;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Set;
 import paa.provincias.IAlmacenPoblaciones;
+import cliente.frames.ClienteFrame;
+import cliente.frames.AvisoFrame;
 
-public class ClienteAWT extends ClienteAWTFrame {
+public class ClienteHandler extends ClienteFrame {
     public static final long serialVersionUID = 43L;
     private static final String FICHERO = "almacen.dat";
     private IAlmacenPoblaciones almacen;
     private ActionListener menuItemNuevaProvinciaListener;
     private ActionListener menuItemAcercaDeListener;
 
-    public ClienteAWT (
-            IAlmacenPoblaciones almacen, String titulo, int ancho, int alto) {
+    public ClienteHandler(
+            IAlmacenPoblaciones almacen, String titulo,
+            int ancho, int alto) {
         super(titulo, ancho, alto);
         this.almacen = almacen;
-        this.init();
+        init();
     }
 
     public void menuItemAcercaDeHandler(ActionEvent e) {
@@ -28,29 +31,30 @@ public class ClienteAWT extends ClienteAWTFrame {
     }
 
     private void init() {
-        this.initData();
-        this.initHandlers();
-        this.bindHandlers();
+        initData();
+        initHandlers();
+        bindHandlers();
     }
 
     private void initData() {
-        boolean recuperado = this.almacen.recuperar(ClienteAWT.FICHERO);
+        boolean recuperado = almacen.recuperar(
+                ClienteHandler.FICHERO);
         if (!recuperado) {
-
-        }
-        else {
+            new AvisoFrame(ClienteHandler.this,
+                    "No se ha recuperado el fichero de almacen "
+                    + "de datos");
         }
     }
 
 
     private void initHandlers() {
-        this.menuItemNuevaProvinciaListener = new ActionListener() {
+        menuItemNuevaProvinciaListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 menuItemNuevaProvinciaHandler(e);
             }
         };
 
-        this.menuItemAcercaDeListener = new ActionListener() {
+        menuItemAcercaDeListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 menuItemAcercaDeHandler(e);
             }
@@ -58,20 +62,20 @@ public class ClienteAWT extends ClienteAWTFrame {
     }
 
     private void bindProvincias(Set<String> provincias) {
-        this.listProvincias.removeAll();
+        listProvincias.removeAll();
         for(String provincia: provincias) {
-            this.listProvincias.add(provincia);
+            listProvincias.add(provincia);
         }
     }
 
     private void bindHandlers() {
-        this.menuItemNuevaProvincia.addActionListener(
-                this.menuItemNuevaProvinciaListener);
-        this.menuItemAcercaDe.addActionListener(
-                this.menuItemAcercaDeListener);
-        this.buttonNuevaProvincia.addActionListener(
-                this.menuItemNuevaProvinciaListener);
-        this.addWindowListener(new WindowAdapter () {
+        menuItemNuevaProvincia.addActionListener(
+            menuItemNuevaProvinciaListener);
+        menuItemAcercaDe.addActionListener(
+            menuItemAcercaDeListener);
+        buttonNuevaProvincia.addActionListener(
+            menuItemNuevaProvinciaListener);
+        addWindowListener(new WindowAdapter () {
             public void windowClosing(WindowEvent e) {
                 System.out.println("Gracias por utilizar nuestro programa");
                 System.exit(0);
