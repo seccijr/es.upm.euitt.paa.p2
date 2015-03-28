@@ -22,12 +22,17 @@ public class ClienteHandler extends ClienteFrame {
         init();
     }
 
-    public void menuItemAcercaDeHandler(ActionEvent e) {
+    public void crearNuevaProvincia(String provincia) {
+        this.almacen.addProvincia(provincia);
+        Set<String> provincias = this.almacen.getProvincias();
+        this.bindProvincias(provincias);
+    }
 
+    public void menuItemAcercaDeHandler(ActionEvent e) {
     }
 
     public void menuItemNuevaProvinciaHandler(ActionEvent e) {
-
+        new NuevaProvinciaHandler(ClienteHandler.this);
     }
 
     private void init() {

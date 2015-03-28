@@ -6,9 +6,11 @@ import java.awt.event.*;
 
 public class NuevaProvinciaFrame extends Dialog {
     public static final long serialVersionUID = 45L;
-    private Panel panelEntradas;
-    private Panel panelBotones;
-    private TextField provincia;
+    protected Panel panelEntradas;
+    protected Panel panelBotones;
+    protected TextField textProvincia;
+    protected Button buttonCrear;
+    protected Button buttonCancelar;
 
     public NuevaProvinciaFrame (Window f) {
         super(f, "Crear provincia", Dialog.ModalityType.APPLICATION_MODAL);
@@ -17,20 +19,17 @@ public class NuevaProvinciaFrame extends Dialog {
 
         panelEntradas = new Panel();
         panelEntradas.setLayout(new FlowLayout());
-        add(panelEntradas, BorderLayout.SOUTH);
+        add(panelEntradas, BorderLayout.NORTH);
 
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing (WindowEvent e) {
-                NuevaProvinciaFrame.this.dispose();
-            }
-        });
+        panelBotones = new Panel();
+        panelBotones.setLayout(new FlowLayout());
+        add(panelBotones, BorderLayout.NORTH);
+
         pack();
         setVisible(true);
     }
 
-    public String getProvincia() {
-        String result = "";
+    private void init() {
 
-        return result;
     }
 }

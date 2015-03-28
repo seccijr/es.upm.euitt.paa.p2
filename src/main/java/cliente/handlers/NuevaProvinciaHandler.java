@@ -4,29 +4,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Set;
 import paa.provincias.IAlmacenPoblaciones;
-import cliente.frames.ClienteFrame;
-import cliente.frames.AvisoFrame;
+import cliente.frames.NuevaProvinciaFrame;
 
 public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
     public static final long serialVersionUID = 46L;
-    private static final String FICHERO = "almacen.dat";
-    private IAlmacenPoblaciones almacen;
+    private ClienteHandler clienteHandler;
     private ActionListener buttonCrearListener;
     private ActionListener buttonCancelarListener;
+    private WindowAdapter closeWindowAdapter;
 
-    public NuevaProvinciaHandler(Window f,
-            IAlmacenPoblaciones almacen) {
-        super(f);
-        this.almacen = almacen;
+    public NuevaProvinciaHandler(ClienteHandler clienteHandler) {
+        super(clienteHandler);
+        this.clienteHandler = clienteHandler;
         init();
-    }
-
-    public void menuItemAcercaDeHandler(ActionEvent e) {
-
-    }
-
-    public void menuItemNuevaProvinciaHandler(ActionEvent e) {
-
     }
 
     private void init() {
@@ -34,41 +24,36 @@ public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
         bindHandlers();
     }
 
-
-    private void initHandlers() {
-        menuItemNuevaProvinciaListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                menuItemNuevaProvinciaHandler(e);
-            }
-        };
-
-        menuItemAcercaDeListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                menuItemAcercaDeHandler(e);
-            }
-        };
+    private void closeWindow() {
+        NuevaProvinciaHandler.this.dispose();
     }
 
-    private void bindProvincias(Set<String> provincias) {
-        listProvincias.removeAll();
-        for(String provincia: provincias) {
-            listProvincias.add(provincia);
-        }
+    private void initHandlers() {
+        buttonCrearListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String provincia = textProvincia.getText();
+                clienteHandler.crearNuevaProvincia(provincia);
+            }
+        };
+
+        buttonCancelarListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                closeWindow();
+            }
+        };
+
+        closeWindowAdapter = new WindowAdapter() {
+            public void windowClosing (WindowEvent e) {
+                closeWindow();
+            }
+        };
     }
 
     private void bindHandlers() {
-        menuItemNuevaProvincia.addActionListener(
-            menuItemNuevaProvinciaListener);
-        menuItemAcercaDe.addActionListener(
-            menuItemAcercaDeListener);
-        buttonNuevaProvincia.addActionListener(
-            menuItemNuevaProvinciaListener);
-        addWindowListener(new WindowAdapter () {
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Gracias por utilizar nuestro programa");
-                System.exit(0);
-            }
-        });
-
+        buttonCrear.addActionListener(
+            buttonCrearListener);
+        buttonCancelar.addActionListener(
+            buttonCancelarListener);
+        addWindowListener(closeWindowAdapter);
     }
 }
