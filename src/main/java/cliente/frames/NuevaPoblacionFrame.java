@@ -25,6 +25,14 @@ public class NuevaPoblacionFrame extends Dialog {
     protected Label labelHabitantes;
     protected Label labelCodigoAEMET;
 
+    /**
+     * Constructor para la ventana de
+     * nueva población
+     *
+     * @param f Window de la ventana padre
+     * @param provincia
+     * @return void
+     */
     public NuevaPoblacionFrame(Window f, String provincia) {
         super(f, "Crear provincia", ModalityType.APPLICATION_MODAL);
         this.provincia = provincia;
@@ -33,6 +41,11 @@ public class NuevaPoblacionFrame extends Dialog {
         setLocationRelativeTo(f);
     }
 
+    /**
+     * Inicializa los componentes de esta venatana
+     *
+     * @return void
+     */
     private void initialize() {
         textPoblacion = new TextField("", 30);
         textProvincia = new TextField(provincia, 30);
@@ -48,6 +61,12 @@ public class NuevaPoblacionFrame extends Dialog {
         labelCodigoAEMET = new Label("Código AEMET: ");
     }
 
+    /**
+     * Coloca los componentes de esta venatana
+     * en las posiciones correspondientes
+     *
+     * @return void
+     */
     private void setupLayout() {
         setSize(ancho, alto);
         setLayout(new BorderLayout());

@@ -14,6 +14,13 @@ public class NuevaProvinciaFrame extends Dialog {
     protected Button buttonCancelar;
     protected Label labelNuevaProvincia;
 
+    /**
+     * Constructor para la ventana de
+     * nueva provincia
+     *
+     * @param f Window de la ventana padre
+     * @return void
+     */
     public NuevaProvinciaFrame (Window f) {
         super(f, "Crear provincia", Dialog.ModalityType.APPLICATION_MODAL);
         initialize();
@@ -21,6 +28,11 @@ public class NuevaProvinciaFrame extends Dialog {
         setLocationRelativeTo(f);
     }
 
+    /**
+     * Inicializa los componentes de esta venatana
+     *
+     * @return void
+     */
     private void initialize() {
         labelNuevaProvincia = new Label("Nueva provincia: ");
         textProvincia = new TextField("", 30);
@@ -30,6 +42,12 @@ public class NuevaProvinciaFrame extends Dialog {
         buttonCrear = new Button("Crear");
     }
 
+    /**
+     * Coloca los componentes de esta venatana
+     * en las posiciones correspondientes
+     *
+     * @return void
+     */
     private void setupLayout() {
         setSize(ancho, alto);
         setLayout(new BorderLayout());

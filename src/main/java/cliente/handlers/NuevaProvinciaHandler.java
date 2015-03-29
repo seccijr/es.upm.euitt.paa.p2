@@ -10,6 +10,12 @@ public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
     private ActionListener buttonCancelarListener;
     private WindowAdapter closeWindowAdapter;
 
+    /**
+     * Constructor para la ventana de nueva provincia
+     *
+     * @param clienteHandler Window padre
+     * @return void
+     */
     public NuevaProvinciaHandler(ClienteHandler clienteHandler) {
         super(clienteHandler);
         this.clienteHandler = clienteHandler;
@@ -18,10 +24,21 @@ public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
         setVisible(true);
     }
 
+    /**
+     * Cierra la ventana
+     *
+     * @return void
+     */
     private void closeWindow() {
         NuevaProvinciaHandler.this.dispose();
     }
 
+    /**
+     * Inicializa los manejadores para la ventana
+     * de nueva provincia
+     *
+     * @return void
+     */
     private void initHandlers() {
         buttonCrearListener = new ActionListener() {
             @Override
@@ -47,6 +64,12 @@ public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
         };
     }
 
+    /**
+     * Vincula los manejadores para la ventana
+     * de nueva provincia
+     *
+     * @return void
+     */
     private void bindHandlers() {
         buttonCrear.addActionListener(
             buttonCrearListener);

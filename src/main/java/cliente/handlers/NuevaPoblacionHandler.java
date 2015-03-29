@@ -16,6 +16,14 @@ public class NuevaPoblacionHandler extends NuevaPoblacionFrame {
     private ActionListener buttonCancelarListener;
     private WindowAdapter closeWindowAdapter;
 
+    /**
+     * Constructor para la ventana de nueva población
+     *
+     * @param clienteHandler Window padre
+     * @param provincia String de la provincia a la que
+     *                  pertenece la nueva población
+     * @return void
+     */
     public NuevaPoblacionHandler(Window clienteHandler, String provincia) {
         super(clienteHandler, provincia);
         this.clienteHandler = (ClienteHandler)clienteHandler;
@@ -24,10 +32,21 @@ public class NuevaPoblacionHandler extends NuevaPoblacionFrame {
         setVisible(true);
     }
 
+    /**
+     * Cierra la ventana
+     *
+     * @return void
+     */
     private void closeWindow() {
         NuevaPoblacionHandler.this.dispose();
     }
 
+    /**
+     * Inicializa los manejadores para la ventana
+     * de nueva poblacion
+     *
+     * @return void
+     */
     private void initHandlers() {
         buttonCrearListener = new ActionListener() {
             @Override
@@ -61,6 +80,12 @@ public class NuevaPoblacionHandler extends NuevaPoblacionFrame {
         };
     }
 
+    /**
+     * Vincula los manejadores para la ventana
+     * de nueva poblacion
+     *
+     * @return void
+     */
     private void bindHandlers() {
         buttonCrear.addActionListener(
             buttonCrearListener);

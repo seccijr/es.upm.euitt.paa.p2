@@ -51,12 +51,24 @@ public class ClienteFrame extends Frame {
     protected List listPoblaciones;
     protected List listPredicciones;
 
+
+    /**
+     * Constructor para la ventana del cliente
+     *
+     * @param titulo String del título
+     * @return void
+     */
     public ClienteFrame(String titulo) {
         super(titulo);
         initialize();
         setupLayout();
     }
 
+    /**
+     * Inicializa los componentes de esta venatana
+     *
+     * @return void
+     */
     private void initialize() {
         menuBar = new MenuBar();
         menuArchivo = new Menu("Archivo");
@@ -103,6 +115,12 @@ public class ClienteFrame extends Frame {
         listPredicciones = new List();
     }
 
+    /**
+     * Coloca los componentes de esta venatana
+     * en las posiciones correspondientes
+     *
+     * @return void
+     */
     private void setupLayout() {
         setSize(ancho, alto);
         setLocationRelativeTo(null);
