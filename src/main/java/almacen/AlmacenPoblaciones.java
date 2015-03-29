@@ -5,9 +5,7 @@ import paa.provincias.IAlmacenPoblaciones;
 import java.io.FileNotFoundException;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.HashMap;
-import java.util.Collections;
 import java.io.*;
 
 public class AlmacenPoblaciones implements IAlmacenPoblaciones {

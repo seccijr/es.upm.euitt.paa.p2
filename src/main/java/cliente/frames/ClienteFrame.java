@@ -1,5 +1,6 @@
 package cliente.frames;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -7,8 +8,8 @@ import java.util.Date;
 
 public class ClienteFrame extends Frame {
     public static final long serialVersionUID = 42L;
-    private int ancho;
-    private int alto;
+    private int ancho = 800;
+    private int alto = 500;
 
     // AWT members
     protected MenuBar menuBar;
@@ -32,7 +33,7 @@ public class ClienteFrame extends Frame {
 
     protected Panel panelBotones;
     protected Panel panelEstado;
-    protected Panel panelElementos;
+    protected Panel panelProvinciasPoblaciones;
     protected Panel panelPredicciones;
     protected Panel panelProvincias;
     protected Panel panelPoblaciones;
@@ -50,10 +51,8 @@ public class ClienteFrame extends Frame {
     protected List listPoblaciones;
     protected List listPredicciones;
 
-    public ClienteFrame(String titulo, int ancho, int alto) {
+    public ClienteFrame(String titulo) {
         super(titulo);
-        this.ancho = ancho;
-        this.alto = alto;
         initialize();
         setupLayout();
     }
@@ -84,10 +83,10 @@ public class ClienteFrame extends Frame {
 
         panelBotones = new Panel();
         panelEstado = new Panel();
-        panelElementos = new Panel();
-        panelPredicciones = new Panel();
+        panelProvinciasPoblaciones = new Panel();
         panelProvincias = new Panel();
         panelPoblaciones = new Panel();
+        panelPredicciones = new Panel();
 
         buttonActualizarPrediccion = new Button(
                 "Actualizar predicción");
@@ -98,6 +97,10 @@ public class ClienteFrame extends Frame {
         labelPoblaciones = new Label("Poblaciones:");
         labelPredicciones = new Label("Predicciones de ");
         labelEventos = new Label("Gestor AEMET v1.0 (PAA)");
+
+        listProvincias = new List();
+        listPoblaciones = new List();
+        listPredicciones = new List();
     }
 
     private void setupLayout() {
@@ -138,18 +141,23 @@ public class ClienteFrame extends Frame {
         panelEstado.add(labelEventos);
         add(panelEstado, BorderLayout.SOUTH);
 
-        panelElementos.setLayout(new BorderLayout());
+        panelProvinciasPoblaciones.setLayout(new BorderLayout());
 
-        panelProvincias.add(labelProvincias);
-        panelElementos.add(panelProvincias, BorderLayout.NORTH);
+        panelProvincias.setLayout(new BorderLayout());
+        panelProvincias.add(labelProvincias, BorderLayout.NORTH);
+        panelProvincias.add(listProvincias, BorderLayout.CENTER);
+        panelProvinciasPoblaciones.add(panelProvincias, BorderLayout.NORTH);
 
-        panelPoblaciones.add(labelPoblaciones);
-        panelElementos.add(panelPoblaciones, BorderLayout.SOUTH);
+        panelPoblaciones.setLayout(new BorderLayout());
+        panelPoblaciones.add(labelPoblaciones, BorderLayout.NORTH);
+        panelPoblaciones.add(listPoblaciones, BorderLayout.CENTER);
+        panelProvinciasPoblaciones.add(panelPoblaciones, BorderLayout.CENTER);
 
-        add(panelElementos, BorderLayout.WEST);
+        add(panelProvinciasPoblaciones, BorderLayout.WEST);
 
-        panelPredicciones.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panelPredicciones.add(labelPredicciones);
+        panelPredicciones.setLayout(new BorderLayout());
+        panelPredicciones.add(labelPredicciones, BorderLayout.NORTH);
+        panelPredicciones.add(listPredicciones, BorderLayout.CENTER);
         add(panelPredicciones, BorderLayout.CENTER);
 
         panelEstado.add(labelEventos);

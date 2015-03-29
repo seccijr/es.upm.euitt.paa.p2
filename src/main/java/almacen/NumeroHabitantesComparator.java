@@ -1,9 +1,11 @@
 package almacen;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import paa.provincias.IPoblacion;
 
-public class NumeroHabitantesComparator implements Comparator<IPoblacion> {
+public class NumeroHabitantesComparator implements Comparator<IPoblacion>, Serializable {
+    public static final long serialVersionUID = 50L;
 
     /**
      * Método auxiliar para detectar si una poblacion existe

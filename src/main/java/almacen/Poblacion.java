@@ -1,14 +1,19 @@
 package almacen;
 
 import paa.provincias.IPoblacion;
-import java.util.Comparator;
-import java.io.Serializable;
+import paa.provincias.IPoblacionAEMET;
+import paa.provincias.IPrediccion;
 
-public class Poblacion implements IPoblacion, Comparable<IPoblacion>, Serializable {
+import java.io.Serializable;
+import java.util.List;
+
+public class Poblacion implements IPoblacion, IPoblacionAEMET, Comparable<IPoblacion>, Serializable {
     static final long serialVersionUID = -2756440049183558014L;
     private String nombre;
     private String provincia;
     private int habitantes;
+    private String codigoAEMET;
+    private List<IPrediccion> predicciones;
 
     /**
      * Constructor
@@ -53,6 +58,23 @@ public class Poblacion implements IPoblacion, Comparable<IPoblacion>, Serializab
         this.nombre = nombre;
         this.provincia = provincia;
         this.habitantes = habitantes;
+    }
+
+    /**
+     * Constructor con todas las propiedades de la
+     * clase Población
+     *
+     * @param nombre String nombre de la población
+     * @param provincia String nombre de la provincia
+     * @param habitantes int número de habitantes
+     * @param codigoAEMET String con el codigoAEMET
+     * @return IPoblacion con la nueva población
+     */
+    public Poblacion(String nombre, String provincia, int habitantes, String codigoAEMET) {
+        this.nombre = nombre;
+        this.provincia = provincia;
+        this.habitantes = habitantes;
+        this.codigoAEMET = codigoAEMET;
     }
 
     /**
@@ -119,5 +141,41 @@ public class Poblacion implements IPoblacion, Comparable<IPoblacion>, Serializab
      */
     public int compareTo(IPoblacion p) {
         return this.getNombre().compareTo(p.getNombre());
+    }
+
+    /**
+     * Getter codigoAEMET
+     *
+     * @return String del codigoAEMET
+     */
+    public String getCodigoAEMET() {
+        return codigoAEMET;
+    }
+
+    /**
+     * Setter codigoAEMET
+     *
+     * @param codigoAEMET
+     */
+    public void setCodigoAEMET(String codigoAEMET) {
+        this.codigoAEMET = codigoAEMET;
+    }
+
+    /**
+     * Getter predicciones
+     *
+     * @return List<IPrediccion> del predicciones
+     */
+    public List<IPrediccion> getPredicciones() {
+        return predicciones;
+    }
+
+    /**
+     * Setter predicciones
+     *
+     * @param predicciones
+     */
+    public void setPredicciones(List<IPrediccion> predicciones) {
+        this.predicciones = predicciones;
     }
 }

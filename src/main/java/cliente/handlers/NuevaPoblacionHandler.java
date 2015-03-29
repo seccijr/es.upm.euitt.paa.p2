@@ -1,34 +1,48 @@
 package cliente.handlers;
 
-import java.awt.event.*;
-import cliente.frames.NuevaProvinciaFrame;
+import cliente.frames.AvisoFrame;
+import cliente.frames.NuevaPoblacionFrame;
 
-public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class NuevaPoblacionHandler extends NuevaPoblacionFrame {
     public static final long serialVersionUID = 46L;
     private ClienteHandler clienteHandler;
     private ActionListener buttonCrearListener;
     private ActionListener buttonCancelarListener;
     private WindowAdapter closeWindowAdapter;
 
-    public NuevaProvinciaHandler(ClienteHandler clienteHandler) {
-        super(clienteHandler);
-        this.clienteHandler = clienteHandler;
+    public NuevaPoblacionHandler(Window clienteHandler, String provincia) {
+        super(clienteHandler, provincia);
+        this.clienteHandler = (ClienteHandler)clienteHandler;
         initHandlers();
         bindHandlers();
         setVisible(true);
     }
 
     private void closeWindow() {
-        NuevaProvinciaHandler.this.dispose();
+        NuevaPoblacionHandler.this.dispose();
     }
 
     private void initHandlers() {
         buttonCrearListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String provincia = textProvincia.getText();
-                clienteHandler.crearNuevaProvincia(provincia);
-                closeWindow();
+                String nombre = textPoblacion.getText();
+                int habitantes = Integer.parseInt(textHabitantes.getText());
+                String codigoAEMET = textCodigoAEMET.getText();
+
+                if (nombre.isEmpty() || codigoAEMET.isEmpty()) {
+                    new AvisoFrame(NuevaPoblacionHandler.this, "Debe proporcionar todos los campos");
+                }
+                else {
+                    clienteHandler.crearNuevaPoblacion(nombre, habitantes, codigoAEMET);
+                    closeWindow();
+                }
             }
         };
 
@@ -51,7 +65,7 @@ public class NuevaProvinciaHandler extends NuevaProvinciaFrame {
         buttonCrear.addActionListener(
             buttonCrearListener);
         buttonCancelar.addActionListener(
-            buttonCancelarListener);
+                buttonCancelarListener);
         addWindowListener(closeWindowAdapter);
     }
 }
